@@ -1,6 +1,6 @@
 const cors = require('cors');
 
-const whitelist = ['http://localhost:3000', 'https://nucampsitemern.herokuapp.com/'];
+const whitelist = ['http://localhost:3000', 'http://localhost:8000', 'https://nucampsitemern.herokuapp.com/'];
 const corsOptionsDelegate = (req, callback) => {
     let corsOptions;
     console.log(req.header('Origin'));

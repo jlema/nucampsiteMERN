@@ -1,3 +1,4 @@
+require('dotenv').config();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
@@ -6,8 +7,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 const FacebookTokenStrategy = require('passport-facebook-token');
 
-const config = require('./config.js');
-const secretKey = process.env.JWT_SECRETKEY || config.secretKey;
+const secretKey = process.env.JWT_SECRETKEY;
 
 exports.local = passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -54,8 +54,8 @@ exports.verifyAdmin = (req, res, next) => {
 exports.facebookPassport = passport.use(
     new FacebookTokenStrategy(
         {
-            clientID: process.env.FACEBOOK_CLIENTID || config.facebook.clientId,
-            clientSecret: process.env.FACEBOOK_CLIENTSECRET || config.facebook.clientSecret
+            clientID: process.env.FACEBOOK_CLIENTID,
+            clientSecret: process.env.FACEBOOK_CLIENTSECRET
         },
         (accessToken, refreshToken, profile, done) => {
             User.findOne({ facebookId: profile.id }, (err, user) => {

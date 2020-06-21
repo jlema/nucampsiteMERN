@@ -1,9 +1,9 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 const passport = require('passport');
-const config = require('./config');
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
@@ -17,7 +17,7 @@ const commentRouter = require('./routes/commentRouter');
 
 const mongoose = require('mongoose');
 
-const url = process.env.MONGODB_URI || config.mongoUrl;
+const url = process.env.MONGODB_URI;
 const connect = mongoose.connect(url, {
     useCreateIndex: true,
     useFindAndModify: false,
@@ -49,7 +49,6 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(cookieParser('12345-67890-09876-54321'));
 
 app.use(passport.initialize());
 
@@ -57,7 +56,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.use('/campsites', campsiteRouter);
 app.use('/promotions', promotionRouter);
@@ -65,6 +63,8 @@ app.use('/partners', partnerRouter);
 app.use('/imageUpload', uploadRouter);
 app.use('/favorites', favoriteRouter);
 app.use('/comments', commentRouter);
+
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
