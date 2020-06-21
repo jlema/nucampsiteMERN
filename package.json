@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"start": "node server/bin/www",
-		"build": "cd react-ui/ && npm install && npm run build"
+		"build": "cd react-ui/ && yarn install && yarn run build"
 	},
 	"dependencies": {
 		"cookie-parser": "~1.4.4",
