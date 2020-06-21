@@ -123,7 +123,7 @@ class Main extends Component {
                             <PrivateRoute exact path="/favorites" component={() => <Favorites favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} />} />
                             <Route exact path='/contactus' render={() => <Contact postFeedback={this.props.postFeedback} resetFeedbackForm={this.props.resetFeedbackForm} />} />
                             <Route exact path='/aboutus' render={() => <About partners={this.props.partners} />} />
-                            <Redirect to='/home' />
+                            {/* <Redirect to='/home' /> */}
                         </Switch>
                     </CSSTransition>
                 </TransitionGroup>
