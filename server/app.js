@@ -1,7 +1,7 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(process.cwd(), 'server', '.env') });
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
 var logger = require('morgan');
 const passport = require('passport');
 const cors = require('cors');
@@ -66,7 +66,7 @@ app.use('/favorites', favoriteRouter);
 app.use('/comments', commentRouter);
 
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "react-ui", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html"));
 });
 
 // catch 404 and forward to error handler
