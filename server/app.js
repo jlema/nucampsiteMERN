@@ -56,7 +56,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(express.static(path.join(__dirname, 'react-ui', 'build')));
 
 app.use('/campsites', campsiteRouter);
 app.use('/promotions', promotionRouter);
@@ -66,7 +66,7 @@ app.use('/favorites', favoriteRouter);
 app.use('/comments', commentRouter);
 
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "react-ui", "build", "index.html"));
 });
 
 // catch 404 and forward to error handler
