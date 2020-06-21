@@ -56,6 +56,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.use('/campsites', campsiteRouter);
 app.use('/promotions', promotionRouter);
@@ -64,7 +65,9 @@ app.use('/imageUpload', uploadRouter);
 app.use('/favorites', favoriteRouter);
 app.use('/comments', commentRouter);
 
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
