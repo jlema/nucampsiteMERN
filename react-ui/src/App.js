@@ -25,11 +25,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <DebugRouter>
+        <BrowserRouter>
           <div>
             <Main />
           </div>
-        </DebugRouter>
+        </BrowserRouter>
       </Provider>
     );
   }
