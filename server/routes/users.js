@@ -79,7 +79,7 @@ router.post('/login', cors.corsWithOptions, (req, res, next) => {
 });
 
 router.get('/login/facebook', (req, res) => {
-    res.sendFile(path.resolve('public', 'facebook_login.html'));
+    res.sendFile(path.resolve('server/public', 'facebook_login.html'));
 });
 
 router.get('/logout', cors.corsWithOptions, (req, res, next) => {
