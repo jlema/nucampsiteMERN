@@ -68,52 +68,52 @@ class Main extends Component {
             );
         }
 
-        const CampsiteWithId = ({match}) => {
+        const CampsiteWithId = ({ match }) => {
             return (
                 this.props.auth.isAuthenticated
-                ?
-                <CampsiteInfo
-                    campsite={this.props.campsites.campsites.filter(campsite => campsite._id === match.params.campsiteId)[0]}
-                    isLoading={this.props.campsites.isLoading}
-                    errMess={this.props.campsites.errMess}
-                    comments={this.props.comments.comments.filter(comment => comment.campsite === match.params.campsiteId)}
-                    commentsErrMess={this.props.comments.errMess}
-                    postComment={this.props.postComment}
-                    favorite={this.props.favorites.favorites.exists 
-                                ? this.props.favorites.favorites.campsites.some(campsite => campsite._id === match.params.campsiteId) : false}
-                    postFavorite={this.props.postFavorite}
-                />
-                :
-                <CampsiteInfo
-                    campsite={this.props.campsites.campsites.filter(campsite => campsite._id === match.params.campsiteId)[0]}
-                    isLoading={this.props.campsites.isLoading}
-                    errMess={this.props.campsites.errMess}
-                    comments={this.props.comments.comments.filter(comment => comment.campsite === match.params.campsiteId)}
-                    commentsErrMess={this.props.comments.errMess}
-                    postComment={this.props.postComment}
-                    favorite={false}
-                    postFavorite={this.props.postFavorite}
-                />
+                    ?
+                    <CampsiteInfo
+                        campsite={this.props.campsites.campsites.filter(campsite => campsite._id === match.params.campsiteId)[0]}
+                        isLoading={this.props.campsites.isLoading}
+                        errMess={this.props.campsites.errMess}
+                        comments={this.props.comments.comments.filter(comment => comment.campsite === match.params.campsiteId)}
+                        commentsErrMess={this.props.comments.errMess}
+                        postComment={this.props.postComment}
+                        favorite={this.props.favorites.favorites.exists
+                            ? this.props.favorites.favorites.campsites.some(campsite => campsite._id === match.params.campsiteId) : false}
+                        postFavorite={this.props.postFavorite}
+                    />
+                    :
+                    <CampsiteInfo
+                        campsite={this.props.campsites.campsites.filter(campsite => campsite._id === match.params.campsiteId)[0]}
+                        isLoading={this.props.campsites.isLoading}
+                        errMess={this.props.campsites.errMess}
+                        comments={this.props.comments.comments.filter(comment => comment.campsite === match.params.campsiteId)}
+                        commentsErrMess={this.props.comments.errMess}
+                        postComment={this.props.postComment}
+                        favorite={false}
+                        postFavorite={this.props.postFavorite}
+                    />
             );
         };
 
         const PrivateRoute = ({ component: Component, ...rest }) => (
-          <Route {...rest} render={(props) => (
-            this.props.auth.isAuthenticated
-              ? <Component {...props} />
-              : <Redirect to={{
-                  pathname: '/home',
-                  state: { from: props.location }
-                }} />
-          )} />
+            <Route {...rest} render={(props) => (
+                this.props.auth.isAuthenticated
+                    ? <Component {...props} />
+                    : <Redirect to={{
+                        pathname: '/home',
+                        state: { from: props.location }
+                    }} />
+            )} />
         );
 
         return (
             <div>
-                <Header auth={this.props.auth} 
-                  loginUser={this.props.loginUser} 
-                  logoutUser={this.props.logoutUser} 
-                />   
+                <Header auth={this.props.auth}
+                    loginUser={this.props.loginUser}
+                    logoutUser={this.props.logoutUser}
+                />
                 <TransitionGroup>
                     <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
                         <Switch>
@@ -122,7 +122,7 @@ class Main extends Component {
                             <Route path='/directory/:campsiteId' component={CampsiteWithId} />
                             <PrivateRoute exact path="/favorites" component={() => <Favorites favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite} />} />
                             <Route exact path='/contactus' render={() => <Contact postFeedback={this.props.postFeedback} resetFeedbackForm={this.props.resetFeedbackForm} />} />
-                            <Route exact path='/aboutus' render={() => <About partners={this.props.partners} /> } />
+                            <Route exact path='/aboutus' render={() => <About partners={this.props.partners} />} />
                             <Redirect to='/home' />
                         </Switch>
                     </CSSTransition>
